@@ -191,7 +191,7 @@ class FlutterNfcReaderPlugin(val registrar: Registrar) : MethodCallHandler, Even
     // handle discovered NDEF Tags
     override fun onTagDiscovered(tag: Tag?) {
         if(writeResult!=null){
-            val nfcRecord = NdefRecord(NdefRecord.TNF_EXTERNAL_TYPE, kPath.toByteArray(), ByteArray(0), kWrite.toByteArray())
+            val nfcRecord = NdefRecord.createMime("text/elegro", kWrite.toByteArray())
             val nfcMessage = NdefMessage(arrayOf(nfcRecord))
             writeMessageToTag(nfcMessage, tag)
             val data = mapOf(kId to "", kContent to kWrite, kError to "", kStatus to "write")
